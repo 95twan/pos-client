@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import OrderProgressBar from "../../components/OrderProgressBar";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import YesOrNo from "./YesOrNo";
 import SavePoint from "./SavePoint";
 import axios from "axios";
@@ -54,13 +54,19 @@ const CreditCardBlock = styled.div`
   }
 `;
 
-const CreditCard = ({showModal, hideModal}) => {
+const CreditCard = ({cart, showModal, hideModal}) => {
     const navigate = useNavigate();
 
+    const menus = cart.map(menu => ({
+        id: menu.id,
+        price: menu.price,
+        count: menu.count
+    }))
+
     const data = {
-        menus: '',
+        menus: JSON.stringify(menus),
         payWith: "credit-card",
-        price: 0
+        price: menus.reduce((prev, current) => prev + current.price, 0)
     }
 
     const onClickCancel = (orderNumber) => {

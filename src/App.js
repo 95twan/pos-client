@@ -114,7 +114,7 @@ const App = () => {
                 <Route path="/order-check"
                        element={<OrderCheck cart={cart} addCount={addCount} minusCount={minusCount}/>}/>
                 <Route path="/select-pay" element={<SelectPay/>}/>
-                <Route path="/credit-card" element={<CreditCard showModal={showModal} hideModal={hideModal}/>}/>
+                <Route path="/credit-card" element={<CreditCard cart={cart} showModal={showModal} hideModal={hideModal}/>}/>
                 <Route path="/order-complete" element={<OrderComplete showStandBy={showStandBy} setCart={setCart}/>}/>
             </Routes>
             <Footer showStandBy={showStandBy}/>

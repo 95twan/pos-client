@@ -121,7 +121,7 @@ const App = () => {
             {modal && <Modal hideModal={hideModal} children={modalChildren}/>}
             {standby && <Standby hideStandby={hideStandBy}/>}
             {lock && <Modal
-                children={<AdminLogin currentPassword={currentPassword} title="관리자 암호 입력" success={loginSuccess}/>}/>}
+                children={<AdminLogin login={true} hideModal={hideModal} currentPassword={currentPassword} title="관리자 암호 입력" success={loginSuccess}/>}/>}
         </Template>
     );
 }

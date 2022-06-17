@@ -4,14 +4,21 @@ const MenuItemBlock = styled.div`
   display: inline-block;
   width: 132.5px;
   height: 195px;
-  cursor: pointer;
   border: 1px solid #CB78FE;
   box-sizing: border-box;
   border-radius: 10px;
   background-color: white;
   
-  &:active {
+  &.exist {
+    cursor: pointer;
+  }
+  
+  &.exist:active {
     background-color: rgba(226, 179, 255, 0.7);
+  }
+
+  &.not-exist {
+    pointer-events: none;
   }
 
   & + & {
@@ -49,7 +56,7 @@ const MenuItem = ({addCart, menu}) => {
         if(name !== '') addCart(menu)
     }
     return (
-        <MenuItemBlock onClick={clickMenu}>
+        <MenuItemBlock className={name !== '' ? 'exist' : 'not-exist'} onClick={clickMenu}>
             <div className="menu-image">
                 {imageUrl !== '' ? <img alt={name} src={imageUrl}/> : null}
             </div>

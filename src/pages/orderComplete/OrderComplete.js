@@ -43,7 +43,7 @@ const OrderComplete = ({showStandBy, setCart}) => {
 
     setTimeout(() => {
         navigate("/");
-    }, 3000);
+    }, 4000);
 
     useEffect(() => {
         return () => {

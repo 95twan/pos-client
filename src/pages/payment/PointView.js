@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
+import {API_HOST} from "../../lib/env";
 
 const PointViewBlock = styled.div`
   background: #FFFFFF;
@@ -30,15 +32,24 @@ const TitleBlock = styled.div`
   }
 `;
 
-const PointView = ({hideModal, orderNumber}) => {
-    const [point, setPoint] = useState(0)
+const PointView = ({hideModal, orderNumber, point, userId}) => {
     const [totalPoint, setTotalPoint] = useState(0)
 
     const navigate = useNavigate();
 
     setTimeout(() => {
         hideModal();
-    }, 3000);
+    }, 4000);
+
+    useEffect(() => {
+        axios.get(`${API_HOST}/users/${userId}/point/`)
+            .then((res) => {
+                setTotalPoint(res.data.data.point)
+            })
+            .catch(() => {
+                console.log('error')
+            })
+    }, [userId])
 
     useEffect(() => {
         return () => {
@@ -60,4 +71,3 @@ const PointView = ({hideModal, orderNumber}) => {
 };
 
 export default PointView;
-

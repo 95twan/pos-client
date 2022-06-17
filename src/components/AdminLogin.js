@@ -11,17 +11,21 @@ const PasswordBlock = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 
+  .top-margin {
+    height: 30px;
+  }
+
   .title {
     position: relative;
-    height: 100px;
+    height: 60px;
+    margin-bottom: 10px;
 
     .title-text {
       position: absolute;
       text-align: center;
       font-size: 24px;
-
+      bottom: 0;
       left: 50%;
-      top: 52%;
       transform: translateX(-50%);
     }
   }
@@ -40,12 +44,30 @@ const PasswordBlock = styled.div`
   }
 `;
 
+const ExitButtonBlock = styled.div`
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: 0;
+  border-radius: 50%;
+  box-sizing: border-box;
+  border: 1px solid red;
+  background-color: lightgray;
+  background-image: url("img/exit.png");
+  background-position: center;
+  background-size: 60%;
+  background-repeat: no-repeat;
+  right: 0;
+  top: 0;
+  transform: translate(50%, -50%);
+`
+
 const PasswordNumber = styled.div`
   display: inline-block;
   height: 60px;
   width: 60px;
   background: #C4C4C4;
-  border-radius: 10px;
   text-align: center;
   vertical-align: middle;
   line-height: 60px;
@@ -56,15 +78,16 @@ const PasswordNumber = styled.div`
   }
 `;
 
-const AdminLogin = ({title, success}) => {
-    const [password, setPassword] = useState(['', '', '', ''])
+const AdminLogin = ({login, hideModal, title, success}) => {
+    const [password, setPassword] = useState(['', '', '', '']);
     const numberPadClick = (n) => {
+        if (password[3] !== '') return;
         for (let i = 0; i < 4; i++) {
             if (password[i] === '') {
-                const newPassword = []
-                newPassword.push(...password.slice(0, i))
-                newPassword.push(n)
-                newPassword.push(...password.slice(i + 1))
+                const newPassword = [];
+                newPassword.push(...password.slice(0, i));
+                newPassword.push(n);
+                newPassword.push(...password.slice(i + 1));
                 setPassword(newPassword);
                 break;
             }
@@ -76,10 +99,27 @@ const AdminLogin = ({title, success}) => {
         setPassword(['', '', '', ''])
     }
 
+    const onClickCancel = () => {
+        if (password[0] === '') return;
+        for (let i = 3; i >= 0; i--) {
+            if (password[i] !== '') {
+                const newPassword = []
+                newPassword.push(...password.slice(0, i))
+                newPassword.push('')
+                newPassword.push(...password.slice(i + 1))
+                setPassword(newPassword);
+                break;
+            }
+        }
+    }
+
     return (
         <PasswordBlock onClick={(e) => {
             e.stopPropagation();
         }}>
+            <div className="top-margin">
+                {!login && <ExitButtonBlock onClick={hideModal}/>}
+            </div>
             <div className="title">
                 <div className="title-text">{title}</div>
             </div>
@@ -90,7 +130,8 @@ const AdminLogin = ({title, success}) => {
                     ))}
                 </div>
             </div>
-            <NumberPad numberPadClick={numberPadClick} onClickComplete={() => onClickComplete(password.join(''))}/>
+            <NumberPad numberPadClick={numberPadClick} onClickComplete={() => onClickComplete(password.join(''))}
+                       onClickCancel={onClickCancel}/>
         </PasswordBlock>
     );
 };

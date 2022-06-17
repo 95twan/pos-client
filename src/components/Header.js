@@ -38,7 +38,7 @@ const Header = ({showModal, hideModal, currentPassword, setCurrentPassword}) => 
     })
 
     const showAdmin = () => {
-        showModal(<AdminLogin currentPassword={currentPassword} title="관리자 암호 입력" success={loginSuccess}/>);
+        showModal(<AdminLogin hideModal={hideModal} title="관리자 암호 입력" success={loginSuccess}/>);
     }
 
     return (

@@ -73,6 +73,7 @@ const ExitButtonBlock = styled.div`
 
 const SavePoint = ({hideModal, showModal, orderNumber, point}) => {
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [active, setActive] = useState(false);
     const navigate = useNavigate();
 
     const pointData = {
@@ -92,6 +93,11 @@ const SavePoint = ({hideModal, showModal, orderNumber, point}) => {
     useEffect(() => {
         if (phoneNumber.length === 3 || phoneNumber.length === 8) {
             setPhoneNumber(phoneNumber.concat('-'));
+        }
+        if (phoneNumber.length === 13) {
+            setActive(true);
+        } else {
+            setActive(false);
         }
     }, [phoneNumber])
 
@@ -161,7 +167,8 @@ const SavePoint = ({hideModal, showModal, orderNumber, point}) => {
             <div className="phoneNumber-block">
                 <div className="phoneNumber">{phoneNumber}</div>
             </div>
-            <NumberPad numberPadClick={numberPadClick} onClickComplete={onClickComplete} onClickCancel={backspace}/>
+            <NumberPad active={active} numberPadClick={numberPadClick} onClickComplete={onClickComplete}
+                       onClickCancel={backspace}/>
         </SavePointBlock>
     );
 };

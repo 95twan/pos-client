@@ -77,7 +77,8 @@ const CreditCard = ({cart, showModal, hideModal}) => {
     }
 
     const onClickOk = (orderNumber) => {
-        showModal(<SavePoint hideModal={hideModal} showModal={showModal} orderNumber={orderNumber} point={parseInt(price/100)}/>);
+        showModal(<SavePoint hideModal={hideModal} showModal={showModal} orderNumber={orderNumber}
+                             point={parseInt(price / 100)}/>);
     }
 
     const showPointSaveOrNot = () => {

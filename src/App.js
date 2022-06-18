@@ -114,14 +114,16 @@ const App = () => {
                 <Route path="/order-check"
                        element={<OrderCheck cart={cart} addCount={addCount} minusCount={minusCount}/>}/>
                 <Route path="/select-pay" element={<SelectPay/>}/>
-                <Route path="/credit-card" element={<CreditCard cart={cart} showModal={showModal} hideModal={hideModal}/>}/>
+                <Route path="/credit-card"
+                       element={<CreditCard cart={cart} showModal={showModal} hideModal={hideModal}/>}/>
                 <Route path="/order-complete" element={<OrderComplete showStandBy={showStandBy} setCart={setCart}/>}/>
             </Routes>
             <Footer showStandBy={showStandBy}/>
             {modal && <Modal hideModal={hideModal} children={modalChildren}/>}
             {standby && <Standby hideStandby={hideStandBy}/>}
             {lock && <Modal
-                children={<AdminLogin login={true} hideModal={hideModal} currentPassword={currentPassword} title="관리자 암호 입력" success={loginSuccess}/>}/>}
+                children={<AdminLogin login={true} hideModal={hideModal} currentPassword={currentPassword}
+                                      title="관리자 암호 입력" success={loginSuccess}/>}/>}
         </Template>
     );
 }

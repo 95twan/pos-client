@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import NumberPad from "./NumberPad";
 
 const PasswordBlock = styled.div`
@@ -80,6 +80,13 @@ const PasswordNumber = styled.div`
 
 const AdminLogin = ({login, hideModal, title, success}) => {
     const [password, setPassword] = useState(['', '', '', '']);
+    const [active, setActive] = useState(false);
+
+    useEffect(() => {
+        if(password[3] !== '') setActive(true);
+        else setActive(false);
+    }, [password])
+
     const numberPadClick = (n) => {
         if (password[3] !== '') return;
         for (let i = 0; i < 4; i++) {
@@ -130,7 +137,7 @@ const AdminLogin = ({login, hideModal, title, success}) => {
                     ))}
                 </div>
             </div>
-            <NumberPad numberPadClick={numberPadClick} onClickComplete={() => onClickComplete(password.join(''))}
+            <NumberPad active={active} numberPadClick={numberPadClick} onClickComplete={() => onClickComplete(password.join(''))}
                        onClickCancel={onClickCancel}/>
         </PasswordBlock>
     );

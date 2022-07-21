@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Cart from "../../components/Cart";
 import OrderProgressBar from "../../components/OrderProgressBar";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 
 const OrderCheckBlock = styled.div`

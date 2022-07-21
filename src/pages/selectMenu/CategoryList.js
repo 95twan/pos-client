@@ -29,7 +29,7 @@ const LoaderBlock = styled.div`
 const CategoryList = ({setSelectedCategory}) => {
     const [categories, setCategories] = useState([])
     const [loading, response, error] = usePromise(() => {
-        return axios.get(`${API_HOST}/categories/`);
+        return axios.get(`${API_HOST}/categories`);
     }, [])
     useEffect(() => {
         if (response) {

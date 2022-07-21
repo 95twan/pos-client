@@ -126,10 +126,10 @@ const SavePoint = ({hideModal, showModal, orderNumber, point}) => {
                 'Content-Type': 'application/json'
             }
         }).then(() => {
-            showModal(<PointView hideModal={hideModal} orderNumber={orderNumber} userId={id} point={point}/>)
+            showModal(<PointView hideModal={hideModal} orderNumber={orderNumber} userId={id} point={point}/>);
         }).catch(() => {
-            console.log('error')
-        })
+            setPhoneNumber('');
+        });
     }
 
     const onClickComplete = () => {

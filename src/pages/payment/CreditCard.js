@@ -60,15 +60,15 @@ const CreditCard = ({cart, showModal, hideModal}) => {
     const menus = cart.map(menu => ({
         id: menu.id,
         price: menu.price,
-        count: menu.count
+        quantity: menu.count
     }))
 
-    const price = menus.reduce((prev, current) => prev + (current.price * current.count), 0);
+    const totalPrice = menus.reduce((prev, current) => prev + (current.price * current.quantity), 0);
 
     const orderData = {
-        menus: JSON.stringify(menus),
+        menuItems: menus.map(menu => ({id: menu.id, quantity: menu.quantity})),
         payWith: "credit-card",
-        price: price
+        totalPrice: totalPrice
     }
 
     const onClickCancel = (orderNumber) => {
@@ -78,10 +78,11 @@ const CreditCard = ({cart, showModal, hideModal}) => {
 
     const onClickOk = (orderNumber) => {
         showModal(<SavePoint hideModal={hideModal} showModal={showModal} orderNumber={orderNumber}
-                             point={parseInt(price / 100)}/>);
+                             point={parseInt(totalPrice / 100)}/>);
     }
 
     const showPointSaveOrNot = () => {
+        console.log(orderData)
         axios.post(`${API_HOST}/orders/`, orderData, {
             headers: {
                 'Content-Type': 'application/json'

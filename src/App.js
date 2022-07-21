@@ -12,6 +12,7 @@ import OrderComplete from "./pages/orderComplete/OrderComplete";
 import Modal from "./components/Modal";
 import ModalCart from "./components/ModalCart";
 import AdminLogin from "./components/AdminLogin";
+import {POS_PASSWORD} from "./lib/env";
 
 const Template = styled.div`
   background: #ffffff;
@@ -27,7 +28,7 @@ const App = () => {
     const [modalChildren, setModalChildren] = useState(null);
     const [cart, setCart] = useState([]);
     const [lock, setLock] = useState(true)
-    const [currentPassword, setCurrentPassword] = useState("1234");
+    const [currentPassword, setCurrentPassword] = useState(POS_PASSWORD);
 
     const hideModal = () => {
         setModal(false);
